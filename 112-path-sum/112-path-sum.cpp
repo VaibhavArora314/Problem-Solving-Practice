@@ -18,6 +18,6 @@ class Solution {
     }
 public:
     bool hasPathSum(TreeNode* root, int targetSum) {
-        return (root == nullptr) ? false : helper(root,targetSum,0);
+        return helper(root,targetSum,0);
     }
 };
