@@ -1,16 +1,21 @@
 class Solution {
 public:
     bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
-        string first ="",second="";
+        int i,j;
+        int m,n;
+        i=j=m=n=0;
         
-        for (auto x:word1) {
-            first += x;
+        while (i<word1.size() && j<word2.size()) {
+            if (word1[i][m++] != word2[j][n++]) return false;
+            
+            if (m >= word1[i].size()) {
+                i++;m=0;
+            }
+            if (n >= word2[j].size()) {
+                j++;n=0;
+            }
         }
-        
-        for (auto x:word2) {
-            second += x;
-        }
-        
-        return first == second;
+
+        return (i == word1.size() && j == word2.size());
     }
 };
