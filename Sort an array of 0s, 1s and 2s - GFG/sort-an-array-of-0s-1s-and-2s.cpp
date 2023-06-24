@@ -10,22 +10,25 @@ class Solution
     public:
     void sort012(int a[], int n)
     {
-        int b[3]={0};
-        for (int i=0;i<n;i++) {
-            b[a[i]]++;
-        }
-        int i=0,j=0;
-        while (i<n) {
-            if (b[j] == 0) {
-                j++;
-                continue;
+        int zeros=0,twos=n-1,cur=0;
+        
+        while (cur <= twos) {
+            switch (a[cur]) {
+                case 0: {
+                    swap(a[cur++],a[zeros++]);
+                    break;
+                }
+                case 1: {
+                    cur++;
+                    break;
+                }
+                case 2: {
+                    swap(a[cur],a[twos--]);
+                    break;
+                }
             }
-            if (j == 3) return;
-            a[i++] = j;
-            b[j]--;
         }
     }
-    
 };
 
 //{ Driver Code Starts.
