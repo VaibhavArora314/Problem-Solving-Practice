@@ -10,8 +10,10 @@ class Solution {
             curProb = temp.first;
             cur = temp.second;
             
-            // if (cur == end) return;
+            if (cur == end) return;
+            
             pq.pop();
+
 
             if (adjacentList.find(cur) == adjacentList.end()) {
                 continue;
