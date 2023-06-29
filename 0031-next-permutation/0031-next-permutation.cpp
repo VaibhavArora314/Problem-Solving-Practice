@@ -8,7 +8,10 @@ public:
         }
 
         if (i<0) {
-            sort(nums.begin(),nums.end());
+            i=0,j=nums.size()-1;
+            while (i<j) {
+                swap(nums[i++],nums[j--]);
+            }
             return;
         }
 
