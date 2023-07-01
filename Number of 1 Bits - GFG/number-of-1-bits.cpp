@@ -6,12 +6,12 @@ using namespace std;
 class Solution {
   public:
     int setBits(int N) {
-        int ans=0;
+        int count = 0;
         while (N) {
-            ans += N%2;
-            N /= 2;
+            if ((N & 1) != 0) count++;
+            N=N>>1;
         }
-        return ans;
+        return count;
     }
 };
 
