@@ -1,6 +1,6 @@
 class Solution {
     int helper(int i,vector<int> &distributions, vector<int>& cookies,int k,int zeroCount) {
-        // if (cookies.size() - i < zeroCount) return INT_MAX;
+        if (cookies.size() - i < zeroCount) return INT_MAX;
 
         if (cookies.size() == i) return *max_element(distributions.begin(),distributions.end());
 
