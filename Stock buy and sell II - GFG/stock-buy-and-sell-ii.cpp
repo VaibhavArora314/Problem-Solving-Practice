@@ -42,7 +42,7 @@ class Solution {
             while (i<n-1 && prices[i+1] >= prices[i]) i++;
             int sell = i;
             
-            if (prices[sell] > prices[buy]) maxProfit += prices[sell] - prices[buy];
+            maxProfit += prices[sell] - prices[buy];
             
             // cout<<prices[sell]<<" "<<prices[buy]<<" "<<maxProfit<<endl;
             
