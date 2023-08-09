@@ -9,9 +9,9 @@ public:
         int ans=-1;
         int i=2;
         while (i*i<=N) {
-            while (N%i == 0) {
+            if (N%i == 0) {
                 ans = i;
-                N /= i;
+                while (N%i == 0) N /= i;
             }
             i++;
         }
