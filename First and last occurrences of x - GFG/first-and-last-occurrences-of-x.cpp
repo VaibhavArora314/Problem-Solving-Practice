@@ -19,8 +19,9 @@ int getFirstOccurence(int arr[],int n,int x) {
 vector<int> find(int arr[], int n , int x) {
     int f = getFirstOccurence(arr,n,x);
     if (arr[f] != x) return {-1,-1};
-    int l = getFirstOccurence(arr,n,x+1);
-    if (arr[l] != x) l--;
+    if (arr[n-1] == x) return {f,n-1};
+    
+    int l = getFirstOccurence(arr,n,x+1)-1;
     
     return {f,l};
 }
