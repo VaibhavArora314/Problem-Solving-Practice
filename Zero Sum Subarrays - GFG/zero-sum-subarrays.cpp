@@ -12,7 +12,7 @@ class Solution{
 public:
     //Function to count subarrays with sum equal to 0.
     long long int findSubarray(vector<long long int> &arr, int n ) {
-        map<long long int,long long int> m;
+        unordered_map<long long int,long long int> m;
         m[0] = 1;
         
         long long int ans=0,total=0;
