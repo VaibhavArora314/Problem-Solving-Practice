@@ -15,14 +15,18 @@ class Solution {
                 if (cf>=n) break;
             }
             
-            while (x>0) {
-                x = x/2;
-                ct += x;
-                
-                if (ct>=n) break;
-            }
+            if (cf < n) return false;
             
-            return (cf >= n && ct >= n);
+            // while (x>0) {
+            //     x = x/2;
+            //     ct += x;
+                
+            //     if (ct>=n) break;
+            // }
+            // 
+            // if (ct < n) return false;
+            
+            return true;
         }
     public:
         int findNum(int n) {
