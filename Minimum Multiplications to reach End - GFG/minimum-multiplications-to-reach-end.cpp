@@ -14,20 +14,20 @@ class Solution {
         vector<int> v(100000,-1);
         v[start] = 0;
         
-        queue<pair<int,int>> q;
-        q.push({start,0});
+        queue<int> q;
+        q.push(start);
         
         while (!q.empty()) {
-            pair<int,int> x = q.front();
+            int x = q.front();
             q.pop();
             
-            if (x.first == end) return x.second;
+            if (x == end) return v[x];
             
             for (auto i:arr) {
-                int p = (x.first*i)%100000;
-                if (v[p] == -1 || v[p] > x.second+1) {
-                    v[p] = x.second+1;
-                    q.push({p,x.second+1});
+                int p = (x*i)%100000;
+                if (v[p] == -1 || v[p] > v[x]+1) {
+                    v[p] = v[x]+1;
+                    q.push(p);
                 }
             }
         }
