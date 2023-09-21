@@ -1,27 +1,39 @@
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int totalLength = nums1.size() + nums2.size();
-        int leftPartitionLength = (totalLength+1)/2; // len of left partition of merged sorted array
+        int n1 = nums1.size(),n2= nums2.size();
 
-        int low,high,m1,m2;
-        high = (nums1.size() >= leftPartitionLength) ? leftPartitionLength : nums1.size();
-        low = (nums2.size() >= leftPartitionLength) ? 0 : leftPartitionLength - nums2.size();
+        if (n1 == 0) return (n2&1) ? nums2[n2/2] : (nums2[n2/2]+nums2[n2/2-1])/2.0;
+        if (n2 == 0) return (n1&1) ? nums1[n1/2] : (nums1[n1/2]+nums1[n1/2-1])/2.0;
+
+        int total = n1+n2;
+        int low,high,mid,eleOnLeft = total/2;
+
+        if (eleOnLeft >= nums2.size()) low = eleOnLeft-nums2.size();
+        else low = 0;
+
+        if (eleOnLeft >= nums1.size()) high = n1;
+        else high = eleOnLeft;
+
+        // cout<<low<<" "<<high<<endl;
 
         while (low <= high) {
-            m1 = (low+high)/2;
-            m2 = leftPartitionLength - m1;
+            mid = (low+high)/2;
+            int mid2 = eleOnLeft - mid;
 
-            int x1 = (m1 > 0) ? nums1[m1-1] : INT_MIN,x2 = (m2 > 0) ? nums2[m2-1] : INT_MIN;
-            int y1 = (m1 == nums1.size()) ? INT_MAX : nums1[m1],y2 = (m2 == nums2.size()) ? INT_MAX : nums2[m2];
+            int l1 = mid > 0 ? nums1[mid-1] : INT_MIN,
+                l2 = mid2 > 0 ? nums2[mid2-1] : INT_MIN,
+                r1 = mid < n1 ? nums1[mid] : INT_MAX,
+                r2 = mid2 < n2 ? nums2[mid2] : INT_MAX;
 
-            if (x1 <= y2 && x2 <= y1) {
-                if (totalLength%2 == 0) return (max(x1,x2)+min(y1,y2))/2.0;
-                return max(x1,x2);
-            } else if (x1 > y2) high = m1-1;
-            else low = m1+1;
+            if (l1 <= r2 && l2 <= r1)
+                return (total&1) == 1 ? min(r1,r2)*1.0 : (min(r1,r2)+max(l1,l2))/2.0;
+            if (l1 > r2)
+                high = mid-1;
+            else
+                low = mid+1;
         }
 
-        return 0;
+        return -1;
     }
 };
