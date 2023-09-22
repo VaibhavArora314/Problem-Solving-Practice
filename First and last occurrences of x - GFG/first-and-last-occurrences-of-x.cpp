@@ -3,28 +3,29 @@
 using namespace std;
 
 // } Driver Code Ends
+class Solution
+{
+    int binSearch(int arr[],int n,int x) {
+        int low = 0,high=n-1,mid;
+        
+        while (low<=high) {
+            mid = (low+high)/2;
 
-int getFirstOccurence(int arr[],int n,int x) {
-    int l=0,r=n-1,mid;
-    
-    while (l<r) {
-        mid = (l+r)/2;
-        if (arr[mid] >= x) r = mid;
-        else l = mid+1;
+            if (arr[mid] >= x) high = mid-1;
+            else low = mid+1;
+        }
+        
+        return low;
     }
-    
-    return r;
-}
-
-vector<int> find(int arr[], int n , int x) {
-    int f = getFirstOccurence(arr,n,x);
-    if (arr[f] != x) return {-1,-1};
-    if (arr[n-1] == x) return {f,n-1};
-    
-    int l = getFirstOccurence(arr,n,x+1)-1;
-    
-    return {f,l};
-}
+    public:
+    vector<int> find(int arr[], int n , int x ){
+        int start = binSearch(arr,n,x);
+        if (arr[start] != x) return {-1,-1};
+        
+        int end = binSearch(arr,n,x+1);
+        return {start,end-1};
+    }
+};
 
 //{ Driver Code Starts.
 
@@ -40,7 +41,8 @@ int main()
         for(i=0;i<n;i++)
         cin>>arr[i];
         vector<int> ans;
-        ans=find(arr,n,x);
+        Solution ob;
+        ans=ob.find(arr,n,x);
         cout<<ans[0]<<" "<<ans[1]<<endl;
     }
     return 0;
