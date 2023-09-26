@@ -5,24 +5,20 @@ public:
         for (char c:s) m[c]++;
 
         stack<char> stk;
-        long long mask = 0;
+        vector<bool> inStack(26,false);
         for (char c:s) {
-            int isPresent = (mask & (1<<(c-'a')));
-            if (isPresent > 0) {
-                cout<<isPresent<<endl;
+            if (inStack[c-'a']) {
                 m[c]--;
                 continue;
             }
             
-            while (!stk.empty() && stk.top() > c && m[stk.top()]){
-                mask = (mask ^ (1<<(stk.top()-'a')));
+            while (!stk.empty() && stk.top() > c && m[stk.top()] >= 1){
+                inStack[stk.top()-'a'] = false;
                 stk.pop();
             }
             stk.push(c);
-            mask = (mask | 1<<(c-'a'));
+            inStack[c-'a'] = true;
             m[c]--;
-
-            cout<<mask<<" "<<stk.top()<<" "<<stk.size()<<endl;
         }
 
         string ans="";
