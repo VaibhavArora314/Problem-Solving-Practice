@@ -11,32 +11,30 @@ using namespace std;
 class Solution
 {
   public:
-    long long int solve(string s, int k) {
-    int n = s.size();
+    long long int helper(string s, int k) {
+        int n = s.size();
         
-        long long int c = 0;
-        int j = 0, sz = 0;
-        vector<int>mp(26, 0);
+        long long int ans = 0;
+        int left = 0, count = 0;
+        vector<int>hash(26, 0);
         
-        for(int i=0; i<n; i++)
-        {
-            int ind = s[i]-'a';
-            if(mp[ind] == 0) sz++;
-            mp[ind]++;
+        for(int right=0; right<n; right++) {
+            int index = s[right]-'a';
+            if(hash[index] == 0) count++;
+            hash[index]++;
             
-            while(j <= i && sz > k)
-            {
-                mp[s[j]-'a']--;
-                if(!mp[s[j]-'a']) sz--;
-                j++;
+            while(left <= right && count > k){
+                hash[s[left]-'a']--;
+                if(!hash[s[left]-'a']) count--;
+                left++;
             }
-            if(j <= i) c += (i-j+1);
+            if(left <= right) ans += (right-left+1);
         }
-        return c;
+        return ans;
     }
   
     long long int substrCount (string s, int k) {
-        return solve(s, k) - solve(s,k-1);
+        return helper(s, k) - helper(s,k-1);
  }
 };
 
