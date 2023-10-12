@@ -10,10 +10,10 @@
 
 class Solution {
     int getValue(int index,MountainArray &mountainArr,unordered_map<int,int> &store) {
-        if (store.find(index) != store.end()) return store[index];
+        // if (store.find(index) != store.end()) return store[index];
 
         int val = mountainArr.get(index);
-        store[index] = val;
+        // store[index] = val;
         return val;
     }
     int binMountainLeft(int low,int high,int target,MountainArray &mountainArr,unordered_map<int,int> &store) {
