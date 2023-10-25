@@ -11,26 +11,19 @@ class Solution{
 public:
     int knapSack(int N, int W, int val[], int wt[])
     {
-        vector<vector<int>> dp(N+1,vector<int>(W+1,0));
+        vector<int> dp(W+1,0);
         
-        for (int i=1;i<=N;i++) {
+        for (int i=0;i<N;i++) {
             for (int j=1;j<=W;j++) {
-                dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
-                if (j >= wt[i-1]) {
-                    dp[i][j] = max(dp[i-1][j-wt[i-1]]+val[i-1],dp[i][j]);
-                    dp[i][j] = max(dp[i][j-wt[i-1]]+val[i-1],dp[i][j]);
-                }
+                if (j >= wt[i])
+                    dp[j] = max(dp[j],dp[j-wt[i]]+val[i]);
             }
         }
         
-        // for (auto y:dp) {
-        //     for (auto x:y) cout<<x<<" ";
-        //     cout<<endl;
-        // }
-        
-        return dp[N][W];
+        return dp[W];
     }
 };
+
 
 //{ Driver Code Starts.
 
