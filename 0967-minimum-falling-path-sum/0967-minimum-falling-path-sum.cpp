@@ -12,11 +12,6 @@ public:
             }
         }
 
-        for (auto y:matrix) {
-            for (auto x:y) cout<<x<<" ";
-            cout<<endl;
-        }
-
         return *min_element(matrix[n-1].begin(),matrix[n-1].end());
     }
 };
